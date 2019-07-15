@@ -1,6 +1,5 @@
 package com.mastertechsoftware.flickr.search
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mastertechsoftware.flickr.models.Photo

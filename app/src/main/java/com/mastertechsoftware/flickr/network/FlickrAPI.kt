@@ -1,6 +1,7 @@
 package com.mastertechsoftware.flickr.network
 
 import android.util.Log
+import com.mastertechsoftware.flickr.BuildConfig
 import com.mastertechsoftware.flickr.models.PhotoResponse
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -11,9 +12,8 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 
 /**
- *
+ * Singleton Retrofit Class for accessing Flickr API
  */
-
 object FlickrAPI {
     const val BASE_URL = "https://api.flickr.com/"
     const val API_KEY = "675894853ae8ec6c242fa4c077bcf4a0"
@@ -24,13 +24,15 @@ object FlickrAPI {
         httpClient.connectTimeout(30, TimeUnit.SECONDS)
             .writeTimeout(30, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)
-        val interceptor = HttpLoggingInterceptor()
-        interceptor.level = HttpLoggingInterceptor.Level.BODY
 
-        httpClient.addInterceptor(interceptor)
+        // Needed for Debugging
+        if (BuildConfig.DEBUG) {
+            val interceptor = HttpLoggingInterceptor()
+            interceptor.level = HttpLoggingInterceptor.Level.BODY
 
+            httpClient.addInterceptor(interceptor)
+        }
         val moshi = Moshi.Builder()
-            // ... add your own JsonAdapters and factories ...
             .add(KotlinJsonAdapterFactory())
             .build()
         val retrofit = Retrofit.Builder().baseUrl(BASE_URL)

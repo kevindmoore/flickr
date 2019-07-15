@@ -19,16 +19,12 @@ import com.mastertechsoftware.flickr.ui.ViewHolder
 import kotlinx.android.synthetic.main.photo_item.*
 import kotlinx.android.synthetic.main.search_layout.*
 
-fun View.dpToPx(dp: Int): Int {
-    return (dp * (context.resources.displayMetrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)).toInt()
-}
-
 fun View.pxToDp(pixels: Int): Int {
     return (pixels / (context.resources.displayMetrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)).toInt()
 }
 
 /**
- *
+ * Fragment for searching for images
  */
 class SearchFragment : Fragment() {
     lateinit var viewModel: SearchViewModel
